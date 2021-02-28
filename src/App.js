@@ -12,7 +12,9 @@ function App() {
   const d3Container = createRef(null) // used so d3 can refer to the relevant div
 
   useEffect(() => {
+
     fetchData();
+    // eslint-disable-next-line
   }, [date])
 
   // d3
@@ -72,8 +74,13 @@ function App() {
 
     svg.call(d3tip)
 
-
+  // eslint-disable-next-line
   }, [mixData])
+
+  const dateChange = (e) => {
+    setDate(e)
+    fetchData();
+  }
 
   const fetchData = async () => {
     try {
@@ -122,10 +129,11 @@ function App() {
           maxDate={new Date()}
           placeholderText="Pick a date"
           selected={date}
-          onChange={e => setDate(e)}
+          onChange={dateChange}
           dateFormat="dd/MM/yyyy"
           showYearDropdown
           showMonthDropdown
+          
         />
       </div>
       <div ref={d3Container}>
